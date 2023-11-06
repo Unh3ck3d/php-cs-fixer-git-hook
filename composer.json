@@ -1,0 +1,63 @@
+{
+    "name": "unh3ck3d/php-cs-fixer-git-hook",
+    "type": "library",
+    "description": "Git hook running PHP CS Fixer on staged files using CaptainHook",
+    "license": "MIT",
+    "keywords": [
+        "lint",
+        "git",
+        "php",
+        "hook",
+        "php-cs-fixer",
+        "captainhook",
+        "captainhook-extension"
+    ],
+    "homepage": "https://github.com/Unh3ck3d/php-cs-fixer-git-hook",
+    "support": {
+        "issues": "https://github.com/Unh3ck3d/php-cs-fixer-git-hook/issues"
+    },
+    "require": {
+        "php": "^8.0",
+        "captainhook/captainhook": "^5.0.0",
+        "sebastianfeldmann/cli": "^3.4"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.34.1",
+        "phpstan/phpstan": "^1.10.38",
+        "phpunit/phpunit": "^9.6.13",
+        "ramsey/conventional-commits": "^1.4.0",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "jangregor/phpstan-prophecy": "^1.0"
+    },
+    "suggest": {
+        "captainhook/plugin-composer": "Ensures that CaptainHook hooks get installed automagically"
+    },
+    "autoload": {
+        "psr-4": {
+            "Unh3ck3d\\PhpCsFixerGitHook\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Unh3ck3dTest\\PhpCsFixerGitHook\\": "test/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "vendor/bin/captainhook install -f -s --only-enabled",
+        "lint": "php-cs-fixer fix -v --dry-run --diff",
+        "lint:fix": "php-cs-fixer fix -v --diff",
+        "analyse": "phpstan analyse",
+        "test": "phpunit",
+        "test:coverage": "phpunit --coverage-html coverage --coverage-clover coverage.xml"
+    },
+    "config": {
+    },
+    "extra": {
+        "ramsey/conventional-commits": {
+            "config": {
+                "types": ["chore", "ci", "docs", "refactor", "test", "revert"],
+                "typeCase": "lower"
+            }
+        }
+    }
+}

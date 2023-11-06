@@ -1,0 +1,60 @@
+name: Integration checks
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [ opened, synchronize, reopened, edited ]
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  php-cs-fixer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+      - uses: php-actions/composer@v6
+      - run: composer lint
+
+  phpstan:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: [ 8.0, 8.1, 8.2 ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+      - uses: php-actions/composer@v6
+      - run: composer analyse
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: [ 8.0, 8.1 ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+      - uses: php-actions/composer@v6
+      - run: composer test
+
+  unit-tests-with-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          coverage: pcov
+      - uses: php-actions/composer@v6
+      - run: composer test:coverage

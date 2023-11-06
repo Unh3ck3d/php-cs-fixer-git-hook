@@ -58,3 +58,4 @@ jobs:
           coverage: pcov
       - uses: php-actions/composer@v6
       - run: composer test:coverage
+      - uses: codecov/codecov-action@v3

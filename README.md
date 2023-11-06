@@ -1,8 +1,7 @@
 <a name="readme-top"></a>
 
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Unh3ck3d/php-cs-fixer-git-hook/blob/main/LICENSE)
-[![Code coverage](https://img.shields.io/codecov/c/gh/Unh3ck3d/php-cs-fixer-git-hook?label=codecov&logo=codecov&style=flat-square)](https:/
-/codecov.io/gh/Unh3ck3d/php-cs-fixer-git-hook)
+[![Code coverage](https://img.shields.io/codecov/c/gh/Unh3ck3d/php-cs-fixer-git-hook?label=codecov&logo=codecov&style=flat-square)](https://codecov.io/gh/Unh3ck3d/php-cs-fixer-git-hook)
 
 <h3 align="center">php-cs-fixer-git-hook</h3>
 <p align="center">
